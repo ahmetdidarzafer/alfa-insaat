@@ -30,13 +30,13 @@ const projects = [
   {
     id: 2,
     title: 'Ofis Binası',
-    description: 'Ankara\'da 2000m² alan üzerine kurulu modern ofis binası.',
+    description: 'İstanbul\'da 2000m² alan üzerine kurulu modern ofis binası.',
     imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80',
   },
   {
     id: 3,
     title: 'Rezidans Projesi',
-    description: 'İzmir\'de 5000m² alan üzerine kurulu lüks rezidans projesi.',
+    description: 'İstanbul\'de 5000m² alan üzerine kurulu lüks rezidans projesi.',
     imageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
   },
 ]

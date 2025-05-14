@@ -5,6 +5,7 @@ import {
   EnvelopeIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline'
+import emailjs from '@emailjs/browser'
 
 // Google Maps API anahtarını .env dosyasından al
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
@@ -12,7 +13,7 @@ const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const contactInfo = [
   {
     name: 'Ofis',
-    description: 'Merkez Ofis',
+    description: 'Zeytinburnu',
     icon: BuildingOfficeIcon,
   },
   {
@@ -40,22 +41,59 @@ export default function Contact() {
     subject: '',
     message: '',
   })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Form gönderme işlemi burada yapılacak
-    console.log('Form data:', formData)
-  }
+  const [status, setStatus] = useState({ type: '', message: '' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }))
   }
 
-  // Google Maps için adres koordinatları (Kadıköy örnek koordinatları)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setStatus({ type: '', message: '' })
+
+    try {
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // EmailJS service ID
+        'YOUR_TEMPLATE_ID', // EmailJS template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'info@alfaonarim.com',
+        },
+        'YOUR_PUBLIC_KEY' // EmailJS public key
+      )
+
+      setStatus({
+        type: 'success',
+        message: 'Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.'
+      })
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      })
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: 'Mesajınız gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // Google Maps için adres koordinatları
   const mapLocation = {
     lat: 41.022041,
     lng: 28.905348,
@@ -97,6 +135,13 @@ export default function Contact() {
           {/* Contact form */}
           <div className="lg:pr-8">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900">Bize Ulaşın</h2>
+            {status.message && (
+              <div className={`mt-4 p-4 rounded-lg ${
+                status.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+              }`}>
+                {status.message}
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="mt-10 space-y-6">
               <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 <div>
@@ -108,13 +153,14 @@ export default function Contact() {
                       type="text"
                       name="name"
                       id="name"
+                      required
                       value={formData.name}
                       onChange={handleChange}
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 bg-white"
-                      required
                     />
                   </div>
                 </div>
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
                     E-posta
@@ -124,13 +170,14 @@ export default function Contact() {
                       type="email"
                       name="email"
                       id="email"
+                      required
                       value={formData.email}
                       onChange={handleChange}
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 bg-white"
-                      required
                     />
                   </div>
                 </div>
+
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold leading-6 text-gray-900">
                     Telefon
@@ -146,6 +193,7 @@ export default function Contact() {
                     />
                   </div>
                 </div>
+
                 <div>
                   <label htmlFor="subject" className="block text-sm font-semibold leading-6 text-gray-900">
                     Konu
@@ -155,14 +203,15 @@ export default function Contact() {
                       type="text"
                       name="subject"
                       id="subject"
+                      required
                       value={formData.subject}
                       onChange={handleChange}
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 bg-white"
-                      required
                     />
                   </div>
                 </div>
               </div>
+
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
                   Mesajınız
@@ -172,16 +221,31 @@ export default function Contact() {
                     name="message"
                     id="message"
                     rows={4}
+                    required
                     value={formData.message}
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 bg-white"
-                    required
                   />
                 </div>
               </div>
+
               <div>
-                <button type="submit" className="btn w-full">
-                  Gönder
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn w-full flex justify-center items-center"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Gönderiliyor...
+                    </>
+                  ) : (
+                    'Gönder'
+                  )}
                 </button>
               </div>
             </form>

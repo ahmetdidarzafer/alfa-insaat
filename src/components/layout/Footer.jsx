@@ -7,7 +7,7 @@ const navigation = {
     { name: 'Hizmetlerimiz', href: '/hizmetlerimiz' },
     { name: 'Sertifikalarımız', href: '/sertifikalarimiz' },
     { name: 'İletişim', href: '/iletisim' },
-    { name: 'Bilgi Bankası', href: '/bilgi-bankasi' },
+    //{ name: 'Bilgi Bankası', href: '/bilgi-bankasi' },
   ],
   social: [
     {
@@ -70,7 +70,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; {new Date().getFullYear()} Alfa İnşaat. Tüm hakları saklıdır.
+          &copy; {new Date().getFullYear()} Alfa Onarım & Mimarlık. Tüm hakları saklıdır.
         </p>
       </div>
     </footer>

@@ -1,51 +1,62 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DocumentCheckIcon } from '@heroicons/react/24/outline'
+
+// Resimleri doğrudan import ediyoruz
+import is_sagligi from '../assets/is_sagligi.png'
+import risk from '../assets/risk.png'
+import bilgi_guvenligi from '../assets/bilgi_guvenligi.png'
+import cevre from '../assets/cevre.png'
+import memnuniyet from '../assets/memnuniyet.png'
+import kalite from '../assets/kalite.png'
+import armut from '../assets/armut.jpg'
 
 const certificates = [
   {
     id: 1,
-    title: 'ISO 9001:2015 Kalite Yönetim Sistemi',
-    description: 'Uluslararası kalite standartlarına uygunluk belgesi',
-    imageUrl: '/images/certificates/iso-9001.jpg',
+    title: 'ISO 45001 İş Sağlığı ve Güvenliği',
+    image: is_sagligi,
+    description: 'İş sağlığı ve güvenliği yönetim sistemi sertifikası',
   },
   {
     id: 2,
-    title: 'ISO 14001:2015 Çevre Yönetim Sistemi',
-    description: 'Çevre dostu uygulamalar ve sürdürülebilirlik belgesi',
-    imageUrl: '/images/certificates/iso-14001.jpg',
+    title: 'ISO 31000 Risk Yönetimi',
+    image: risk,
+    description: 'Risk yönetim sistemi sertifikası',
   },
   {
     id: 3,
-    title: 'OHSAS 18001 İş Sağlığı ve Güvenliği',
-    description: 'İş güvenliği ve sağlığı yönetim sistemi belgesi',
-    imageUrl: '/images/certificates/ohsas-18001.jpg',
+    title: 'ISO 27001 Bilgi Güvenliği',
+    image: bilgi_guvenligi,
+    description: 'Bilgi güvenliği yönetim sistemi sertifikası',
   },
   {
     id: 4,
-    title: 'TSE Belgesi',
-    description: 'Türk Standartları Enstitüsü kalite belgesi',
-    imageUrl: '/images/certificates/tse.jpg',
+    title: 'ISO 14001 Çevre Yönetimi',
+    image: cevre,
+    description: 'Çevre yönetim sistemi sertifikası',
+  },
+  {
+    id: 5,
+    title: 'ISO 10002 Müşteri Memnuniyeti',
+    image: memnuniyet,
+    description: 'Müşteri memnuniyeti yönetim sistemi sertifikası',
+  },
+  {
+    id: 6,
+    title: 'ISO 9001 Kalite Yönetimi',
+    image: kalite,
+    description: 'Kalite yönetim sistemi sertifikası',
   },
 ]
 
 const achievements = [
   {
     id: 1,
-    title: 'Yılın En İyi İnşaat Firması',
+    title: 'Armut.com',
     year: '2023',
     description: 'İnşaat sektöründe mükemmellik ödülü',
-  },
-  {
-    id: 2,
-    title: 'Sürdürülebilir Yapı Ödülü',
-    year: '2022',
-    description: 'Çevre dostu projeler kategorisinde başarı ödülü',
-  },
-  {
-    id: 3,
-    title: 'Müşteri Memnuniyeti Ödülü',
-    year: '2021',
-    description: 'En yüksek müşteri memnuniyeti puanı',
+    image: armut,
   },
 ]
 
@@ -58,39 +69,30 @@ export default function Certificates() {
           <div className="max-w-2xl">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Sertifikalarımız</h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Kalitemizi ve güvenilirliğimizi belgeleyen sertifikalarımız ve başarılarımız.
+              Kalitemizi ve güvenilirliğimizi belgeleyen uluslararası standartlara uygun sertifikalarımız.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Certificates section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
+      {/* Certificates grid */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {certificates.map((certificate) => (
-            <div key={certificate.id} className="flex flex-col items-start">
-              <div className="relative w-full">
+            <div
+              key={certificate.id}
+              className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white h-full"
+            >
+              <div className="relative h-64 w-full">
                 <img
-                  src={certificate.imageUrl}
+                  src={certificate.image}
                   alt={certificate.title}
-                  className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                  className="absolute inset-0 h-full w-full object-contain p-4"
                 />
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
               </div>
-              <div className="max-w-xl">
-                <div className="mt-8 flex items-center gap-x-4 text-xs">
-                  <DocumentCheckIcon className="h-5 w-5 text-primary" aria-hidden="true" />
-                  <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
-                    Sertifika
-                  </span>
-                </div>
-                <div className="group relative">
-                  <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900">
-                    <span className="absolute inset-0" />
-                    {certificate.title}
-                  </h3>
-                  <p className="mt-5 text-sm leading-6 text-gray-600">{certificate.description}</p>
-                </div>
+              <div className="flex flex-1 flex-col space-y-2 p-4">
+                <h3 className="text-lg font-semibold text-gray-900">{certificate.title}</h3>
+                <p className="text-sm text-gray-500">{certificate.description}</p>
               </div>
             </div>
           ))}
@@ -106,16 +108,18 @@ export default function Certificates() {
           </p>
         </div>
         <div className="mt-16 sm:mt-20 lg:mt-24">
-          <dl className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
+          <dl className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-1">
             {achievements.map((achievement) => (
               <div key={achievement.id} className="flex flex-col">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  {achievement.title}
-                </dt>
-                <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-600">
-                  <p className="flex-auto">{achievement.description}</p>
-                  <p className="mt-6 text-sm font-semibold leading-6 text-primary">{achievement.year}</p>
-                </dd>
+                {achievement.image && (
+                  <div className="relative h-72 w-full mb-4">
+                    <img
+                      src={achievement.image}
+                      alt={achievement.title}
+                      className="absolute inset-0 h-full w-full object-contain rounded-lg"
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </dl>
