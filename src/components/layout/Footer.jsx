@@ -52,7 +52,7 @@ export default function Footer() {
   return (
     <footer className="bg-white">
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <nav className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
+        <nav className="-mb-5 columns-1 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
           {navigation.main.map((item) => (
             <div key={item.name} className="pb-6">
               <Link to={item.href} className="text-sm leading-6 text-gray-600 hover:text-primary">
