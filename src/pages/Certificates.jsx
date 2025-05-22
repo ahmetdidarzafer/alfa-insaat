@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { DocumentCheckIcon } from '@heroicons/react/24/outline'
+import { DocumentCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 // Resimleri doğrudan import ediyoruz
 import is_sagligi from '../assets/is_sagligi.png'
@@ -10,42 +10,57 @@ import cevre from '../assets/cevre.png'
 import memnuniyet from '../assets/memnuniyet.png'
 import kalite from '../assets/kalite.png'
 import armut from '../assets/armut.jpg'
+import sosyal_sorumluluk from '../assets/sosyal.png'
+
+// Orijinal sertifika resimleri
+import ISO45001 from '../assets/ISO45001.png'
+import ISO31000 from '../assets/ISO31000.png'
+import ISO26000 from '../assets/ISO26000.png'
+import ISO14001 from '../assets/ISO14001.png'
+import ISO10002 from '../assets/ISO10002.png'
+import ISO9001 from '../assets/ISO9001.png'
 
 const certificates = [
   {
     id: 1,
     title: 'ISO 45001 İş Sağlığı ve Güvenliği',
     image: is_sagligi,
+    originalImage: ISO45001,
     description: 'İş sağlığı ve güvenliği yönetim sistemi sertifikası',
   },
   {
     id: 2,
-    title: 'ISO 31000 Risk Yönetimi',
+    title: 'ISO 31000 Kurumsal Risk Yönetimi',
     image: risk,
-    description: 'Risk yönetim sistemi sertifikası',
+    originalImage: ISO31000,
+    description: 'Kurumsal risk yönetim sistemi sertifikası',
   },
   {
     id: 3,
-    title: 'ISO 27001 Bilgi Güvenliği',
-    image: bilgi_guvenligi,
-    description: 'Bilgi güvenliği yönetim sistemi sertifikası',
+    title: 'ISO 26000 Sosyal Sorumluluk',
+    image: sosyal_sorumluluk,
+    originalImage: ISO26000,
+    description: 'Sosyal sorumluluk yönetim sistemi sertifikası',
   },
   {
     id: 4,
     title: 'ISO 14001 Çevre Yönetimi',
     image: cevre,
+    originalImage: ISO14001,
     description: 'Çevre yönetim sistemi sertifikası',
   },
   {
     id: 5,
     title: 'ISO 10002 Müşteri Memnuniyeti',
     image: memnuniyet,
+    originalImage: ISO10002,
     description: 'Müşteri memnuniyeti yönetim sistemi sertifikası',
   },
   {
     id: 6,
     title: 'ISO 9001 Kalite Yönetimi',
     image: kalite,
+    originalImage: ISO9001,
     description: 'Kalite yönetim sistemi sertifikası',
   },
 ]
@@ -61,6 +76,18 @@ const achievements = [
 ]
 
 export default function Certificates() {
+  const [selectedCertificate, setSelectedCertificate] = useState(null)
+
+  const openModal = (certificate) => {
+    setSelectedCertificate(certificate)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const closeModal = () => {
+    setSelectedCertificate(null)
+    document.body.style.overflow = 'auto'
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero section */}
@@ -81,7 +108,8 @@ export default function Certificates() {
           {certificates.map((certificate) => (
             <div
               key={certificate.id}
-              className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white h-full"
+              className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white h-full cursor-pointer"
+              onClick={() => openModal(certificate)}
             >
               <div className="relative h-64 w-full">
                 <img
@@ -98,6 +126,27 @@ export default function Certificates() {
           ))}
         </div>
       </div>
+
+      {/* Modal - tıklandığında orijinal resmi gösteriyoruz */}
+      {selectedCertificate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
+          <div className="relative max-h-[90vh] max-w-[90vw] overflow-auto rounded-lg bg-white p-4">
+            <button
+              onClick={closeModal}
+              className="absolute right-4 top-4 rounded-full bg-white p-2 text-gray-400 hover:text-gray-500 focus:outline-none"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+            <div className="mt-4">
+              <img
+                src={selectedCertificate.originalImage}
+                alt={selectedCertificate.title}
+                className="max-h-[80vh] w-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Achievements section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-32 sm:mt-40">
