@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Koyu tema (varsayılan) */
+  --color-surface: 15 15 15;
+  --color-surface-mid: 26 26 26;
+  --color-surface-high: 36 36 36;
+  --color-content: 240 237 232;
+  --color-content-muted: 138 134 128;
+  --color-content-inverse: 23 21 18;
+  --color-primary: 65 86 163;
+  --color-primary-light: 122 137 191;
+  --color-primary-dark: 49 65 122;
+  --color-primary-foreground: 245 243 239;
+}
+
+:root[data-theme="light"] {
+  /* Aydınlık tema — aynı token'lar, kontrast için ters değerler */
+  --color-surface: 247 245 242;
+  --color-surface-mid: 239 235 229;
+  --color-surface-high: 219 213 202;
+  --color-content: 23 21 18;
+  --color-content-muted: 107 103 95;
+  --color-content-inverse: 240 237 232;
+  --color-primary: 65 86 163;
+  --color-primary-light: 49 65 122;
+  --color-primary-dark: 31 41 92;
+  --color-primary-foreground: 245 243 239;
+}
+
+@layer base {
+  html {
+    @apply bg-surface text-content;
+    scroll-behavior: smooth;
+    transition:
+      background-color 300ms cubic-bezier(0.23, 1, 0.32, 1),
+      color 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
