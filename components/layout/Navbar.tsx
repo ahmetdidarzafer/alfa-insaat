@@ -23,18 +23,23 @@ export default function Navbar() {
         aria-label="Ana navigasyon"
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8"
       >
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex h-12 items-stretch gap-3">
           <Image
             src="/images/logo.png"
             alt=""
             aria-hidden
-            width={124}
-            height={120}
-            className="h-10 w-auto"
+            width={81}
+            height={99}
+            className="h-full w-auto object-contain"
             priority
           />
-          <span className="whitespace-nowrap font-display text-xl font-semibold text-primary-light md:text-2xl">
-            Alfa Onarım &amp; İnşaat
+          <span className="flex flex-col items-stretch justify-center leading-none">
+            <span className="font-display text-3xl font-semibold tracking-wide text-primary-light md:text-4xl">
+              ALFA
+            </span>
+            <span className="mt-1 block w-full whitespace-nowrap text-center text-[8px] uppercase text-primary-light [text-align-last:justify] md:text-[10px]">
+              Onarım ve İnşaat
+            </span>
           </span>
         </Link>
 

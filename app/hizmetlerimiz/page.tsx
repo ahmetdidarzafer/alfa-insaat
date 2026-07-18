@@ -4,7 +4,9 @@ import {
   BuildingOffice2Icon,
   BuildingStorefrontIcon,
   ClipboardDocumentCheckIcon,
+  ClipboardDocumentListIcon,
   HomeModernIcon,
+  MagnifyingGlassIcon,
   SwatchIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
@@ -16,11 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Hizmetlerimiz",
     description:
-      "İç mimari tasarım, dış cephe tasarımı, konut ve ticari mekân renovasyonu, mimari restorasyon ve proje yönetimi. Her projeye özel çözümler.",
+      "Size nasıl yardımcı olabiliriz? Ücretsiz keşif hizmeti, şeffaf fiyatlandırma ve iç mimari, dış cephe, renovasyon ve restorasyon alanlarında hizmetlerimiz.",
     openGraph: {
       title: "Hizmetlerimiz | Alfa Onarım ve İnşaat",
       description:
-        "İç mimari, dış cephe tasarımı, renovasyon, mimari restorasyon ve proje yönetimi. Her projeye özel çözümler.",
+        "Ücretsiz keşif hizmeti, şeffaf fiyatlandırma ve iç mimari, dış cephe, renovasyon ve restorasyon alanlarında hizmetlerimiz.",
       locale: "tr_TR",
       type: "website",
     },
@@ -66,46 +68,40 @@ const SERVICES = [
   },
 ] as const;
 
-const PROCESS_STEPS = [
+const ROADMAP_STEPS = [
   {
     number: "01",
-    name: "İlk Görüşme",
+    name: "Ücretsiz Keşif Hizmeti",
     description:
-      "Projenizin ihtiyaçlarını ve beklentilerinizi detaylı olarak dinliyoruz.",
+      "Proje alanınızı yerinde inceliyor, ihtiyaçlarınızı uzman ekibimizle birlikte analiz ediyoruz. Hiçbir ücret talep etmeden gerçekleştirdiğimiz bu ön görüşme ile mekanınızın potansiyelini ve teknik gereksinimlerini belirliyoruz.",
+    icon: MagnifyingGlassIcon,
   },
   {
     number: "02",
-    name: "Planlama",
+    name: "Şeffaf ve Ayrıntılı Fiyatlandırma",
     description:
-      "Projeniz için en uygun çözümü ve zaman planını oluşturuyoruz.",
-  },
-  {
-    number: "03",
-    name: "Uygulama",
-    description:
-      "Uzman ekibimizle projenizi en yüksek kalitede hayata geçiriyoruz.",
-  },
-  {
-    number: "04",
-    name: "Teslim",
-    description: "Projenizi zamanında ve eksiksiz olarak teslim ediyoruz.",
+      "Keşif sonrası elde ettiğimiz veriler ışığında, projenin her bir aşamasını kapsayan detaylı bir maliyet analizi hazırlıyoruz. Sürpriz maliyetlerle karşılaşmamanız için malzeme, işçilik ve uygulama kalemlerini içeren net ve anlaşılır teklifler sunuyoruz.",
+    icon: ClipboardDocumentListIcon,
   },
 ] as const;
 
 export default function Hizmetlerimiz() {
   return (
     <>
-      {/* Hero — sayfa adı overline, manifesto cümle display başlık */}
+      {/* Hero — sayfa adı overline, "Size Nasıl Yardımcı Olabiliriz?" başlığı */}
       <section className="mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pb-32 sm:pt-32 lg:px-8">
         <FadeUp className="max-w-3xl">
           <p className="text-xs uppercase tracking-widest text-primary-light">
             Hizmetlerimiz
           </p>
           <h1 className="mt-6 font-display text-5xl font-light tracking-tight text-content">
-            Her projenin kendine özgü ihtiyaçları vardır.
+            Size Nasıl Yardımcı Olabiliriz?
           </h1>
           <p className="mt-6 max-w-xl text-base font-normal leading-relaxed text-content-muted">
-            Size en uygun çözümü sunmak için buradayız.
+            Alfa Onarım ve İnşaat Limited Şirketi olarak, yaşam alanlarınızı
+            veya iş yerlerinizi daha fonksiyonel, estetik ve güvenli hale
+            getirmek için buradayız. Projelerinizde kaliteyi ve şeffaflığı ön
+            planda tutan bir çalışma prensibini benimsiyoruz.
           </p>
         </FadeUp>
       </section>
@@ -142,31 +138,38 @@ export default function Hizmetlerimiz() {
         </dl>
       </section>
 
-      {/* Process — kronolojik süreç, sıralama bilgisi taşıyan numaralar */}
+      {/* Yol Haritası — 2 aşamalı, kronolojik süreç */}
       <section className="mx-auto mt-28 max-w-7xl px-6 sm:mt-36 lg:px-8">
         <FadeUp>
           <span aria-hidden className="block h-0.5 w-16 bg-primary-light" />
           <h2 className="mt-8 font-display text-3xl font-light text-content">
-            Çalışma Sürecimiz
+            Projelerinize Başlarken İzlediğimiz Yol Haritası
           </h2>
           <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed text-content-muted">
-            Her projemizde izlediğimiz profesyonel süreç.
+            Hayalinizdeki projeyi gerçeğe dönüştürmek için süreci sizin
+            adınıza en güvenilir şekilde yönetiyoruz.
           </p>
         </FadeUp>
-        <ol className="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {PROCESS_STEPS.map((step, i) => (
+        <ol className="mt-16 grid grid-cols-1 gap-x-12 gap-y-16 md:grid-cols-2">
+          {ROADMAP_STEPS.map((step, i) => (
             <li key={step.name}>
               <FadeUp delay={i * 70}>
-                <span
-                  aria-hidden
-                  className="font-display text-4xl font-light text-content-muted"
-                >
-                  {step.number}
-                </span>
-                <h3 className="mt-4 text-base font-medium text-content">
+                <div className="flex items-center gap-5">
+                  <span
+                    aria-hidden
+                    className="font-display text-4xl font-light text-content-muted"
+                  >
+                    {step.number}
+                  </span>
+                  <step.icon
+                    className="h-6 w-6 shrink-0 text-content-muted"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="mt-5 text-lg font-medium text-content">
                   {step.name}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-content-muted">
+                <p className="mt-3 text-base leading-relaxed text-content-muted">
                   {step.description}
                 </p>
               </FadeUp>
@@ -181,10 +184,12 @@ export default function Hizmetlerimiz() {
           <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-20 sm:py-24 md:flex-row md:items-center md:justify-between lg:px-8">
             <div className="max-w-2xl">
               <h2 className="font-display text-3xl font-light text-content">
-                Projeniz İçin Bizimle İletişime Geçin
+                Ücretsiz Keşif Randevunuzu Oluşturun
               </h2>
               <p className="mt-5 text-base font-normal leading-relaxed text-content-muted">
-                Size en uygun çözümü sunmak için hazırız.
+                Siz de kaliteli işçilik ve profesyonel bir yönetimle
+                mekanınızı dönüştürmek istiyorsanız, bizimle hemen iletişime
+                geçebilir ve ücretsiz keşif randevunuzu oluşturabilirsiniz.
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-4">

@@ -12,58 +12,37 @@ export async function generateMetadata(): Promise<Metadata> {
     // burada elle yazılıyor, diğer tüm sayfalarda template otomatik ekliyor.
     title: "Ana Sayfa | Alfa Onarım ve İnşaat",
     description:
-      "Alfa Onarım ve İnşaat: İstanbul'da iç mimari, dış cephe tasarımı ve renovasyon. 20 yılı aşkın tecrübeyle konut ve ticari mekânları yeniliyoruz.",
+      "Alfa Onarım ve İnşaat: İstanbul merkezli onarım ve inşaat firması. 2015'ten bu yana kamu ve özel sektörde renovasyon, tadilat ve dekorasyon projeleri.",
     openGraph: {
       title: "Ana Sayfa | Alfa Onarım ve İnşaat",
       description:
-        "İstanbul'da iç mimari, dış cephe tasarımı ve renovasyon. 20 yılı aşkın tecrübeyle konut ve ticari mekânları yeniliyoruz.",
+        "İstanbul merkezli onarım ve inşaat firması. 2015'ten bu yana kamu ve özel sektörde renovasyon, tadilat ve dekorasyon projeleri.",
       locale: "tr_TR",
       type: "website",
     },
   };
 }
 
+// Hakkımızda sayfasındaki "Neden Biz?" değerleriyle tutarlı (kısaltılmış özet)
 const FEATURES = [
   {
-    name: "Profesyonel Ekip",
-    description: "Deneyimli ve uzman kadromuzla kaliteli hizmet sunuyoruz.",
-  },
-  {
-    name: "Modern Ekipman",
-    description: "En son teknoloji ve ekipmanlarla çalışıyoruz.",
-  },
-  {
-    name: "Kaliteli Malzeme",
+    name: "Tecrübe",
     description:
-      "Yüksek kaliteli malzemeler kullanarak uzun ömürlü projeler üretiyoruz.",
+      "2015'ten bu yana binlerce metrekarelik uygulama tecrübesi.",
   },
   {
-    name: "Zamanında Teslim",
-    description: "Projelerimizi söz verdiğimiz sürede tamamlıyoruz.",
+    name: "Geniş Hizmet Yelpazesi",
+    description: "Altyapıdan dekorasyona, anahtar teslim çözüm ortağınız.",
   },
-] as const;
-
-const PROJECTS = [
   {
-    title: "Villa Renovasyonu",
+    name: "Müşteri Odaklılık",
     description:
-      "İstanbul'da 500m² villanın iç mekânlarının ve dış cephesinin kapsamlı yenilenmesi.",
-    image: "/images/projects/project-1.jpg",
-    alt: "Villa Renovasyonu dış cephe görünümü",
+      "İhtiyaçlarınıza göre şekillenen esnek ve sonuç odaklı yaklaşım.",
   },
   {
-    title: "Ofis Yenileme",
+    name: "Güvenilirlik",
     description:
-      "İstanbul'da 2000m² ofis alanının modern çalışma ortamına dönüştürülmesi.",
-    image: "/images/projects/project-2.jpg",
-    alt: "Ofis Yenileme cephe görünümü",
-  },
-  {
-    title: "Rezidans İç Mimari",
-    description:
-      "İstanbul'da 5000m² rezidansın iç mimari tasarımı ve uygulaması.",
-    image: "/images/projects/project-3.jpg",
-    alt: "Rezidans İç Mimari cephe görünümü",
+      "Verdiğimiz sözü zamanında ve eksiksiz yerine getirme prensibi.",
   },
 ] as const;
 
@@ -76,11 +55,12 @@ export default function Home() {
           <FadeUp className="lg:col-span-6">
             <span aria-hidden className="block h-0.5 w-16 bg-primary-light" />
             <h1 className="mt-8 font-display text-5xl font-light tracking-tight text-content lg:text-6xl">
-              Mekânlarınızı yeniden tasarlıyoruz.
+              Mekânlarınıza değer katıyoruz.
             </h1>
             <p className="mt-6 max-w-xl text-base font-normal leading-relaxed text-content-muted">
-              İstanbul’da iç mimari, dış cephe tasarımı ve renovasyon. 20 yılı
-              aşkın tecrübemizle konut ve ticari mekânları yeniliyoruz.
+              İstanbul merkezli onarım ve inşaat firması. 2015’ten bu yana kamu
+              ve özel sektörde, yaşam ve çalışma alanlarını kaliteli işçilik ve
+              şeffaf bir anlayışla yeniliyoruz.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link
@@ -140,41 +120,6 @@ export default function Home() {
         </dl>
       </section>
 
-      {/* Projects */}
-      <section className="mx-auto mt-28 max-w-7xl px-6 sm:mt-36 lg:px-8">
-        <FadeUp>
-          <span aria-hidden className="block h-0.5 w-16 bg-primary-light" />
-          <h2 className="mt-8 font-display text-3xl font-light text-content">
-            Tamamladığımız Bazı Projeler
-          </h2>
-          <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed text-content-muted">
-            Modern mimari anlayışımız ve kaliteli işçiliğimizle hayata
-            geçirdiğimiz projelerimizden örnekler.
-          </p>
-        </FadeUp>
-        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-3">
-          {PROJECTS.map((project, i) => (
-            <FadeUp key={project.title} delay={i * 70}>
-              <article>
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  width={1200}
-                  height={900}
-                  className="aspect-[4/3] w-full object-cover"
-                />
-                <h3 className="mt-6 font-display text-xl font-light text-content">
-                  {project.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-content-muted">
-                  {project.description}
-                </p>
-              </article>
-            </FadeUp>
-          ))}
-        </div>
-      </section>
-
       {/* CTA band */}
       <section className="mt-28 border-y border-surface-high bg-surface-mid sm:mt-36">
         <FadeUp>
@@ -184,7 +129,8 @@ export default function Home() {
                 Projenizi Hayata Geçirmeye Hazır mısınız?
               </h2>
               <p className="mt-5 text-base font-normal leading-relaxed text-content-muted">
-                Bizimle iletişime geçin, projenizi birlikte değerlendirelim.
+                Ücretsiz keşif ve şeffaf fiyatlandırmayla projenizi birlikte
+                değerlendirelim.
               </p>
             </div>
             <Link

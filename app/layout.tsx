@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -32,6 +32,12 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     type: "website",
   },
+  // favicon.ico, icon.png ve apple-icon.png app/ klasöründen otomatik bağlanır.
+  manifest: "/manifest.webmanifest",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0F0F0F",
 };
 
 export default function RootLayout({

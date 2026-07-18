@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: alfa-mimarlik
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./out
+    envVars:
+      - key: NEXT_PUBLIC_EMAILJS_SERVICE_ID
+        sync: false
+      - key: NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+        sync: false
+      - key: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
